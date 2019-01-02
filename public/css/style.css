@@ -1,0 +1,76 @@
+.box{
+    width:600px;
+    margin:0 auto;
+    border:1px solid #ccc;
+    text-align:center;
+    padding-bottom:10px;
+   }
+   .vacation-list{
+    width:600px;
+    margin:0 auto;
+    text-align:center;
+   }
+   .vacation-list ul> li {
+    background:#f1f5d2;
+      margin-top:10px;
+      margin-bottom: 10px;
+      min-height:50px;
+      position:relative;
+   }
+   .details-box{
+    width:500px;
+    border:1 0 solid;
+    float:left;
+   }
+   .badge-align{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    cursor:default;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin:5px 0px;
+    width:85px;
+    position:absolute;
+    right:10px;
+   }
+  .btn a{
+    color:white;
+    text-decoration:none;
+  }
+  .approved{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+  }
+  .rejected{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+  }
+  .pending{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+  }
+  .vacation-list .pending:active:hover,.vacation-list .pending:active{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+  }
+  .vacation-list .accepted:active:hover,.vacation-list .accepted:active{
+    color: #fff;
+   background-color: #d9534f;
+    border-color: #d43f3a;
+  }
+  .vacation-list .accepted:active:hover,.vacation-list .accepted:active{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+  }
