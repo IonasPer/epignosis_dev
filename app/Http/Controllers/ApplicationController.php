@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\VacationRequested;
+use App\Notifications\ApplicationUpdated;
 use App\Models\User;
 
 class ApplicationController extends Controller
@@ -34,7 +35,9 @@ class ApplicationController extends Controller
                         'vacation_start' => $request->get('date_from'),
                         'vacation_end' => $request->get('date_to'),
                         'status' => 'pending',
-                        'reason' => $request->get('reason')
+                        'reason' => $request->get('reason'),
+                        'created_at' => Carbon::now()->toDateString(),
+                        'updated_at' => Carbon::now()->toDateString()
                     ];
 
                 $result_id = DB::table('applications')->insertGetId($application_data);
@@ -55,4 +58,15 @@ class ApplicationController extends Controller
            return view('test',['user'=>'user is not authenticated']);
          }
     }
+    function reject($application_id){
+        $qry = DB::table('applications')->where('id',$application_id);
+        $qry->update(['status'=> 'rejected']);
+        $data = $qry->first();
+        $user = User::find($data->user_id);
+        $application_data = ['status' => $data->status, 'date_submitted'=>$data->date_submitted];
+        Notification::send($user,new ApplicationUpdated($application_data));
+
+    }
+
+ 
 }
