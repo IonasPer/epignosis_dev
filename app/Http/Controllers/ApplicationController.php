@@ -58,7 +58,8 @@ class ApplicationController extends Controller
            return view('test',['user'=>'user is not authenticated']);
          }
     }
-    function reject($application_id){
+    function reject($application_id){  
+        
         $qry = DB::table('applications')->where('id',$application_id);
         $qry->update(['status'=> 'rejected']);
         $data = $qry->first();
