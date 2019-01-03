@@ -40,7 +40,41 @@ class MainController extends Controller
     {
     	$user_id  = Auth::user()->id;
     	$user_applications = DB::table('applications')->where('user_id',$user_id)->get();
-     return view('success_login',['applications' =>$user_applications]);
+    	$users = DB::table('users')->get();
+     return view('success_login',['applications' =>$user_applications, 'user_type'=> Auth::user()->user_type,'users' =>$users]);
+    }
+    function addApplication()
+    {
+    	if(Auth::user()->user_type == 'employee'){
+    		$data = [
+    				'date_from' => 'date',
+    				'date_to' => 'date',
+    				'reason' => 'text',	
+    		];
+    	}
+    	return view('form',[
+    		'user_type'=>Auth::user()->user_type, 
+    		'form_action' => '/application/submit', 
+    		'form_data' => $data
+    	]);
+    }
+    function addUser()
+    {
+    	if(Auth::user()->user_type == 'admin'){
+    		$data = [
+    				'first_name' => 'text',
+    				'last_name' => 'text',
+    				'email' => 'email',
+    				'password' => 'password',
+    				'type' => 'text'
+    		];
+    	}
+    	return view('form',[
+    		'user_type'=>Auth::user()->user_type, 
+    		'form_action' => '/user/submit', 
+    		'form_data' => $data
+    	]);
+    	
     }
 
     function logout()
